@@ -1,0 +1,24 @@
+{
+  "model_name": "microsoft/layoutlmv3-base",
+  "epochs": 10,
+  "batch_size": 2,
+  "gradient_accumulation_steps": 4,
+  "learning_rate": 2e-05,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.1,
+  "early_stopping_patience": 3,
+  "max_length": 512,
+  "num_labels": 3,
+  "seed": 42,
+  "effective_batch_size": 8,
+  "class_weights": {
+    "O": 1.0,
+    "B-TOTAL": 7.311672687530518,
+    "I-TOTAL": 1.0
+  },
+  "imbalance_ratio": 53.46055979643766,
+  "batches_per_epoch": 197,
+  "optimizer_steps_per_epoch": 50,
+  "total_training_steps": 500,
+  "warmup_steps": 50
+}

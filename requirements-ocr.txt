@@ -1,0 +1,6 @@
+# FinGuard AI — isolated OCR environment
+# Install in a separate Python virtual environment.
+
+paddleocr==3.7.0
+paddlepaddle==3.2.0
+paddlex==3.7.2

@@ -1,0 +1,20 @@
+{
+    "model": "Invoice Autoencoder",
+    "version": "2.0",
+    "training_method": "Normal-only training",
+    "features": [
+        "log_grand_total",
+        "log_taxable_amount",
+        "log_total_quantity",
+        "log_quantity_per_item",
+        "item_count",
+        "log_avg_unit_price",
+        "tax_ratio"
+    ],
+    "training_records": 84,
+    "validation_normal_records": 18,
+    "threshold_percentile": 95,
+    "threshold": 0.48578137159347534,
+    "epochs": 100,
+    "device": "cuda"
+}

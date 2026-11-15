@@ -1,0 +1,13 @@
+# FinGuard AI — ML and agent dependencies
+# Versions verified in the current main application environment.
+
+langgraph==1.2.19
+numpy==2.4.6
+pandas==2.2.3
+joblib==1.6.0
+RapidFuzz==3.14.6
+scikit-learn==1.6.1
+
+# CPU PyTorch — verify the appropriate wheel index
+# for the target deployment platform before installation.
+torch==2.14.1+cpu
