@@ -1,20 +1,20 @@
 services:
-- type: web
-  name: finguard-ai-api
-  runtime: python
-  buildCommand: pip install -r requirements-api.txt
-  startCommand: uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
-  healthCheckPath: /health
-  disk:
-    name: finguard-review-data
-    mountPath: /var/data
-    sizeGB: 1
-  envVars:
-  - key: PYTHON_VERSION
-    value: 3.12.8
-  - key: FINGUARD_HITL_DATABASE_PATH
-    value: /var/data/human_review.db
-  - key: FINGUARD_CORS_ORIGINS
-    value: https://YOUR-VERCEL-DOMAIN.vercel.app
-  - key: FINGUARD_REVIEWER_TOKEN_HASHES
-    sync: false
+  - type: web
+    name: finguard-ai-api
+    runtime: python
+    buildCommand: pip install -r requirements-api.txt
+    startCommand: uvicorn src.api.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    disk:
+      name: finguard-review-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.8"
+      - key: FINGUARD_HITL_DATABASE_PATH
+        value: "/var/data/human_review.db"
+      - key: FINGUARD_CORS_ORIGINS
+        value: "https://YOUR-VERCEL-DOMAIN.vercel.app"
+      - key: FINGUARD_REVIEWER_TOKEN_HASHES
+        sync: false
