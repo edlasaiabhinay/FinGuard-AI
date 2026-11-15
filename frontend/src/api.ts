@@ -42,7 +42,8 @@ async function apiRequest<T>(
   token: string,
   options: RequestInit = {}
 ): Promise<T> {
-  const response = await fetch(endpoint, {
+  const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? "").replace(/\/+$/, "")
+  const response = await fetch(`${apiBaseUrl}${endpoint}`, {
     ...options,
     headers: {
       Authorization: `Bearer ${token}`,

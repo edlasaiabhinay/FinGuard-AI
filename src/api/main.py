@@ -1,7 +1,10 @@
+from contextlib import asynccontextmanager
 
 import os
 
 from typing import Literal
+
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import (
     FastAPI,
@@ -32,6 +35,7 @@ from src.human_review.database import (
     get_default_database_path,
     get_review_case,
     get_review_audit_history,
+    initialize_review_database,
 )
 
 from src.human_review.review_service import (
@@ -43,6 +47,14 @@ from src.human_review.review_service import (
 
 limiter = Limiter(key_func=get_remote_address)
 
+# Configure browser access for local development and approved deployments.
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    initialize_review_database(get_database_path())
+    yield
+
+
 app = FastAPI(
     title="FinGuard AI — Human Review API",
     description=(
@@ -50,7 +62,26 @@ app = FastAPI(
         "reviewer decisions, and audit history."
     ),
     version="1.0.0",
+    lifespan=lifespan,
 )
+
+cors_origins = [
+    origin.strip().rstrip("/")
+    for origin in os.environ.get(
+        "FINGUARD_CORS_ORIGINS",
+        "http://localhost:5173,http://127.0.0.1:5173",
+    ).split(",")
+    if origin.strip()
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=cors_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_headers=["Authorization", "Content-Type"],
+)
+
 
 app.state.limiter = limiter
 app.add_exception_handler(
